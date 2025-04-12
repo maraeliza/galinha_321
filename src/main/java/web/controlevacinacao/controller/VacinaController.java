@@ -1,5 +1,6 @@
 package web.controlevacinacao.controller;
 
+import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 import org.slf4j.Logger;
@@ -117,6 +118,12 @@ public class VacinaController {
     atributos.addAttribute("mensagem", "Vacina cadastrada com sucesso!");
 
     return "redirect:/mensagem";
+  }
+
+  @HxRequest
+  @GetMapping("/vacinas/cadastrar")
+  public String abrirCadastroVacinaHTMX(Vacina vacina) {
+    return "vacinas/cadastrar :: formulario";
   }
 
   @PostMapping("/vacinas/alterar")
