@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR" layout:decorate="~{layout/layoutpadrao}" xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+  <title>Transações</title>
+</head>
+
+<body>
+  <main layout:fragment="conteudo" class="flex flex-col align-middle w-full m-10">
+    <h2 class="text-2xl w-2/3 ms-16 text-slate-800 mr-1.5" style="margin-top: 20px;">Transações</h2>
+    <div class="hidden md:flex flex-col mt-5">
+      <div class="overflow-x-auto">
+        <div class="min-w-full inline-block align-middle">
+          <div class="border rounded-xl overflow-hidden shadow">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead>
+                <tr>
+                  <div th:replace="~{layout/fragments/paginacao :: coluna(${pagina}, 'id', 'ID', '')}"></div>
+                  <div th:replace="~{layout/fragments/paginacao :: coluna(${pagina}, 'dataTransacao', 'Data', '')}">
+                  </div>
+                  <div th:replace="~{layout/fragments/paginacao :: coluna(${pagina}, 'moedaId', 'Moeda', '')}"></div>
+                  <div th:replace="~{layout/fragments/paginacao :: coluna(${pagina}, 'valor', 'Valor', '')}"></div>
+                  <div th:replace="~{layout/fragments/paginacao :: coluna(${pagina}, 'tipo', 'Tipo', '')}"></div>
+                  <th scope="col" colspan="2" class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase">
+                    Ação
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr th:if="${pagina.vazia}">
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800" colspan="6">Nenhuma
+                    transação encontrada</td>
+                </tr>
+
+                <tr class="odd:bg-white even:bg-gray-100 hover:bg-gray-200" th:each="transacao: ${pagina.conteudo}">
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800" th:text="${transacao.id}">
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"
+                    th:text="${#dates.format(transacao.dataTransacao, 'dd/MM/yyyy HH:mm:ss')}"></td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800" th:text="${transacao.moedaId}"></td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800" th:text="${transacao.valor}"></td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"
+                    th:text="${transacao.tipo ? 'Crédito' : 'Débito'}"></td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-600">
+                    <a th:href="@{/transacoes/alterar/{id}(id=${transacao.id})}">Alterar</a>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-red-600">
+                    <a th:href="@{/transacoes/remover/{id}(id=${transacao.id})}">Deletar</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div th:replace="~{layout/fragments/paginacao :: paginacao(${pagina})}"></div>
+    <div th:each="transacao: ${transacoes}" class="md:hidden flex flex-col mt-5">
+      <div class="overflow-x-auto">
+        <div class="min-w-full inline-block align-middle">
+          <div class="border rounded-xl p-3 overflow-hidden shadow">
+            <div class="m-3">
+              <p th:text="${transacao.id}"></p>
+              <p th:text="${#dates.format(transacao.dataTransacao, 'dd/MM/yyyy HH:mm:ss')}"></p>
+              <p th:text="${transacao.moedaId}"></p>
+              <p th:text="${transacao.valor}"></p>
+              <p th:text="${transacao.tipo ? 'Crédito' : 'Débito'}"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>

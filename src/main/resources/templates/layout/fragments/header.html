@@ -6,12 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" th:href="@{/css/style.css}" />
   <title>Controle de Vacinação</title>
+  <style>
+    .bg-red-400{
+      background-color: #6D0011 !important;
+    }
+    .bg-red-300{
+      background-color: #FFD4F5;
+    }
+  </style>
 </head>
 
 <body>
   <div th:fragment="header">
     <!-- Header -->
-    <header class="flex items-center justify-between bg-gray-800 p-4">
+    <header class="bg-red-400 flex items-center justify-between p-4" style="background-color: #6D0011">
       <!-- Botao Hamburger -->
       <div class="md:hidden">
         <button id="menu-btn" type="button" class="hamburger z-40 block focus:outline-none md:hidden">
@@ -24,16 +32,16 @@
       <!-- Icone e nome sistema -->
       <a th:href="@{/}">
         <div class="flex items-center">
-          <img src="/images/syringe.png" alt="Ícone de uma seringa" class="h-8 w-8 md:h-12 md:w-12" />
-          <div class="text-xl font-semibold text-gray-400 md:text-3xl">Controle de Vacinação</div>
+          <img src="/images/oink.png" alt="Ícone de uma seringa" class="h-8 w-8 md:h-12 md:w-12" />
+          <div style="color:#fff0fc" class="text-xl font-semibold  md:text-3xl">OinkInvest - Invista Melhor</div>
         </div>
       </a>
 
       <!-- Usuário e login/logout -->
       <div class="hidden items-center md:flex">
-        <div class="text-sm text-gray-300 md:text-xl">Grosbilda</div>
-        <a href="#" class="ml-5 rounded-lg border-2 border-gray-600 bg-gray-600 px-8 py-2 text-white shadow-md hover:bg-white hover:text-gray-600"> Login </a>
-        <a href="#" class="ml-5 rounded-lg border-2 border-gray-600 bg-gray-600 px-8 py-2 text-white shadow-md hover:bg-white hover:text-gray-600"> Logout </a>
+        <div class="text-sm text-gray-300 md:text-xl">Mr. Oink</div>
+        <a href="#" class="ml-5 rounded-lg border-2  px-8 py-2 text-white shadow-md hover:bg-white hover:text-gray-600"> Login </a>
+        <a href="#" class="ml-5 rounded-lg border-2  px-8 py-2 text-white shadow-md hover:bg-white hover:text-gray-600"> Logout </a>
       </div>
 
       <!-- Botao Usuario -->

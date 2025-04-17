@@ -10,7 +10,7 @@
 
 <body>
 
-    <button @click="open = !open" th:fragment="menu-item-button(texto, svg)" class="flex w-48 cursor-pointer items-center justify-between py-3 text-gray-400 hover:text-white focus:outline-none">
+    <button @click="open = !open" th:fragment="menu-item-button(texto, svg)" style="color:#fff0fc" class="flex w-48 cursor-pointer items-center justify-between py-3 hover:text-white focus:outline-none">
         <span class="flex items-center">
             <!-- Imagem -->
             <svg th:replace="${svg}"></svg>

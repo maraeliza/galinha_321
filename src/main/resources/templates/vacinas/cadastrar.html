@@ -11,12 +11,12 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
     />
-    <title> Pesquisar Vacinas</title>
+    <title> Pesquisar Bots</title>
   </head>
 
   <body>
    <main layout:fragment="conteudo" th:fragment="formulario" id="main" class="w-full">
-    <h2 class="text-2xl w-2/3 ms-16 text-slate-800 mr-1.5 ">Cadastrar novas vacinas</h2>
+    <h2 class="text-2xl w-2/3 ms-16 text-slate-800 mr-1.5" style="margin-top: 20px;">Cadastrar novos bots</h2>
         <form th:action="@{/vacinas/cadastrar}" method="post" class="w-2/3 mt-10 ms-16 flex flex-col gap-3">
             <div class="flex flex-col gap-30 mb-5">
                
@@ -28,6 +28,20 @@
                 <div class=" mb-5">
                     <label for="descricao" class="w-full block text-gray-700 font-medium mb-2">Descrição</label>
                     <input th:field="${vacina.descricao}" type="text" class="w-full py-3 px-4 text-gray-500 border-gray-300 rounded-lg focus:border-gray-500 focus:ring-gray-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="Digite a descrição" />
+                </div>
+                <div class=" mb-5">
+                  <label for="descricao" class="w-full block text-gray-700 font-medium mb-2">Moeda</label>
+                  <select name="descricao" id="descricao"
+                    class="w-full py-3 px-4 text-gray-500 border-gray-300 rounded-lg focus:border-gray-500 focus:ring-gray-500 disabled:opacity-50 disabled:pointer-events-none">
+                    <option value="" disabled selected>Selecione uma moeda</option>
+                    <option value="BTCUSDT">BTC/USDT</option>
+                    <option value="ETHUSDT">ETH/USDT</option>
+                    <option value="BNBUSDT">BNB/USDT</option>
+                    <option value="BCCUSDT">BCC/USDT</option>
+                    <option value="NEOUSDT">NEO/USDT</option>
+                    <option value="LTCUSDT">LTC/USDT</option>
+                    <option value="QTUMUSDT">QTUM/USDT</option>
+                  </select>
                 </div>
             </div>
             <button type="submit" class="py-3 px-4 text-center w-full inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 focus:outline-none focus:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none">CADASTRAR</button>

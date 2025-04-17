@@ -2,7 +2,6 @@ package web.controlevacinacao.controller;
 
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxRequest;
 import jakarta.servlet.http.HttpServletRequest;
-import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -15,10 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import web.controlevacinacao.filter.VacinaFilter;
-import web.controlevacinacao.model.Status;
 import web.controlevacinacao.model.Vacina;
 import web.controlevacinacao.pagination.PageWrapper;
 import web.controlevacinacao.repository.VacinaRepository;
@@ -42,14 +39,21 @@ public class VacinaController {
     this.vacinaService = vacinaService;
   }
 
+
   @GetMapping("/vacinas")
-  public String mostrarTodasVacinas(Model model) {
-    List<Vacina> vacinas = vacinaRepository.findByStatus(Status.ATIVO);
-    model.addAttribute("vacinas", vacinas);
+  public String mostrarTodasVacinas(
+      VacinaFilter filtro,
+      Model model,
+      @PageableDefault(size = 7) @SortDefault(sort = "codigo", direction = Sort.Direction.ASC) Pageable pageable,
+      HttpServletRequest request) {
+    Page<Vacina> pagina = vacinaRepository.pesquisar(filtro, pageable);
+    logger.trace("Vacinas pesquisadas: {}", pagina.getContent());
+
+    PageWrapper<Vacina> paginaWrapper = new PageWrapper<>(pagina, request);
+    model.addAttribute("pagina", paginaWrapper);
 
     return "vacinas/listar";
   }
-
   @GetMapping("/vacinas/abrirPesquisar")
   public String abrirPesquisar() {
     return "vacinas/pesquisar";
